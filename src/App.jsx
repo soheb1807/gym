@@ -22,9 +22,6 @@ import {
   X,
   Sliders,
   Info,
-  Instagram,
-  Facebook,
-  Youtube,
   Copy,
   CheckCircle2,
   AlertCircle,
@@ -2533,25 +2530,31 @@ export const gymData = ${JSON.stringify(gymData, null, 2)};
               <p className="text-sm text-[#94A3B8] max-w-sm leading-relaxed">
                 {gymData.brand.tagline} Located at {gymData.brand.fullAddress}.
               </p>
+
               <div className="pt-1 flex items-center gap-3">
                 {[
                   {
-                    icon: Instagram,
                     label: "Instagram",
                     url: gymData.socials.instagram,
+                    symbol: "◎",
                   },
                   {
-                    icon: Facebook,
                     label: "Facebook",
                     url: gymData.socials.facebook,
+                    symbol: "f",
                   },
                   {
-                    icon: Youtube,
                     label: "YouTube",
                     url: gymData.socials.youtube,
+                    symbol: "▶",
                   },
                 ].map((soc) => {
-                  const SocIcon = soc.icon;
+                  const socialContent = (
+                    <span className="text-lg font-bold" aria-hidden="true">
+                      {soc.symbol}
+                    </span>
+                  );
+
                   return soc.url ? (
                     <a
                       key={soc.label}
@@ -2561,7 +2564,7 @@ export const gymData = ${JSON.stringify(gymData, null, 2)};
                       aria-label={soc.label}
                       className="w-10 h-10 rounded-sm bg-[#101114] border border-white/10 hover:border-[#CCFF00] text-white flex items-center justify-center transition-colors"
                     >
-                      <SocIcon className="w-4 h-4" />
+                      {socialContent}
                     </a>
                   ) : (
                     <button
@@ -2572,9 +2575,10 @@ export const gymData = ${JSON.stringify(gymData, null, 2)};
                         setConfigDrawerOpen(true);
                       }}
                       title={`${soc.label} link pending owner configuration`}
+                      aria-label={`${soc.label} link pending owner configuration`}
                       className="w-10 h-10 rounded-sm bg-[#101114] border border-white/10 hover:border-[#CCFF00]/50 text-[#94A3B8] hover:text-white flex items-center justify-center transition-colors"
                     >
-                      <SocIcon className="w-4 h-4" />
+                      {socialContent}
                     </button>
                   );
                 })}
